@@ -1,11 +1,20 @@
-export default ({ title, description, date, url }) => `
-<svg fill="none" width="800" height="120" xmlns="http://www.w3.org/2000/svg">
+import {readingTimeCalc} from "../util/utils";
+
+export const ArticleCard = async (data) => {
+    const {link, title, pubDate, content, thumbnail} = data
+    const readingTime = readingTimeCalc(content);
+
+    return `
+<svg fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink">
 	<foreignObject width="100%" height="100%">
-		<div xmlns="http://www.w3.org/1999/xhtml">
+		<div xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:xlink="http://www.w3.org/1999/xlink">
 			<style>
 				*{
           margin: 0;
           padding: 0;
+          width: 100%;
           box-sizing: border-box;
           font-family: sans-serif
 				}
@@ -22,10 +31,10 @@ export default ({ title, description, date, url }) => `
 					align-items:center;
         }
         .outer-container{
-          height:120px;
+          height:100px;
         }
 				.container{
-          height: 118px;
+          height: 98px;
           border: 1px solid rgba(0,0,0,.2);
           padding: 10px 20px;
           border-radius: 10px;
@@ -40,7 +49,7 @@ export default ({ title, description, date, url }) => `
           margin-right: 10px;
           width: 150px;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
         }
         .right{
           flex: 1;
@@ -54,6 +63,7 @@ export default ({ title, description, date, url }) => `
           color: #555
         }
         h3{
+        word-wrap: break-word;
           color: #333
         }
         small{
@@ -65,14 +75,16 @@ export default ({ title, description, date, url }) => `
 				
 			</style>
       <div class="outer-container flex">
-        <a class="container flex" href="${url}" target="__blank">
+        <a class="container flex" xlink:href="${link}" target="__blank">
+        <img src="${thumbnail}"/>
           <div class="right">
             <h3>${title}</h3>
-            <small>${date}</small>
+            <small>${pubDate} · ${readingTime}</small>
           </div>
 				</a>
       </div>
 		</div>
 	</foreignObject>
 </svg>
-`;
+`
+};
