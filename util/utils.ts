@@ -81,7 +81,7 @@ export async function generateSvg(index: string | string[], articles: any[], hea
     const accept = headers['accept'];
     const isImage = dest ? dest === 'image' : !/text\/html/.test(accept);
 
-    let result = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" version="1.2" height="${articles.length * 120}">`;
+    let result = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" version="1.2" height="120">`;
     const articleCard = await ArticleCard(article);
     result += `<g transform="translate(0, 0})">${articleCard}</g>`;
     result += `</svg>`;
