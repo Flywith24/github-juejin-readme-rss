@@ -39,7 +39,7 @@ export const asyncForEach = async (array, callback) => {
 };
 
 
-export async function generateSvg(limit: string | string[], articles: any[], responseArticles: any[], headers, res: NowResponse & { send: (body: any) => VercelResponse; json: (jsonBody: any) => VercelResponse; status: (statusCode: number) => VercelResponse; redirect: (statusOrUrl: (string | number), url?: string) => VercelResponse }) {
+export async function composeSvg(limit: string | string[], articles: any[], responseArticles: any[], headers, res: NowResponse & { send: (body: any) => VercelResponse; json: (jsonBody: any) => VercelResponse; status: (statusCode: number) => VercelResponse; redirect: (statusOrUrl: (string | number), url?: string) => VercelResponse }) {
     if (limit) {
         articles = [...responseArticles.slice(0, Number(limit))];
     } else {
@@ -70,6 +70,31 @@ export async function generateSvg(limit: string | string[], articles: any[], res
     res.end();
 }
 
+export async function generateSvg(index: string | string[], articles: any[], headers, res: NowResponse & { send: (body: any) => VercelResponse; json: (jsonBody: any) => VercelResponse; status: (statusCode: number) => VercelResponse; redirect: (statusOrUrl: (string | number), url?: string) => VercelResponse }) {
+    let article
+    if (index) {
+        article = articles[Number(index)];
+    } else {
+        article = articles[0];
+    }
+    const dest = headers['sec-fetch-dest'] || headers['Sec-Fetch-Dest'];
+    const accept = headers['accept'];
+    const isImage = dest ? dest === 'image' : !/text\/html/.test(accept);
+
+    let result = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="700" version="1.2" height="${articles.length * 120}">`;
+    const articleCard = await ArticleCard(article);
+    result += `<g transform="translate(0, 0})">${articleCard}</g>`;
+    result += `</svg>`;
+
+    if (isImage) {
+        res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
+        res.setHeader('Content-Type', 'image/svg+xml');
+        return res.send(result);
+    }
+
+    res.writeHead(301, { Location: article.link });
+    res.end();
+}
 
 export async function convertImg(url: string) {
     const {data: thumbnailRaw} = await axios.get(url, {

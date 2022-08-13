@@ -1,6 +1,6 @@
 import {NowRequest, NowResponse} from '@vercel/node';
 import {getJuejinArticles} from '../util/requestArticles';
-import {generateSvg} from "../util/utils";
+import {composeSvg} from "../util/utils";
 
 export default async (req: NowRequest, res: NowResponse) => {
     const {
@@ -11,5 +11,5 @@ export default async (req: NowRequest, res: NowResponse) => {
     let articles = []
     const responseArticles = await getJuejinArticles(id);
 
-    return await generateSvg(limit, articles, responseArticles, headers, res);
+    return await composeSvg(limit, articles, responseArticles, headers, res);
 };
