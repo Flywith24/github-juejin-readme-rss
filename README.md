@@ -30,13 +30,7 @@ Github README 主页有很多玩法，例如显示 star 和 commit 数等
 ``` markdown
 [![](https://github-readme-juejin-recent-article-flywith24.vercel.app/juejin?id=219558054476792&limit=2)](https://juejin.cn/user/219558054476792/posts)
 ```
-在此示例中
-
-`id` 为 219558054476792
-
-`limit` 为 2
-
-使用超链接将图片包裹，链接地址指向掘金个人主页
+> 在此示例中，`id` 为 219558054476792，`limit` 为 2，使用超链接将图片包裹，链接地址指向掘金个人主页
 
 
 
@@ -133,17 +127,3 @@ https://github-readme-juejin-recent-article-flywith24.vercel.app/{type}/{id}/{in
 - [github-readme-medium](https://github.com/omidnikrah/github-readme-medium)
 
 - [github-readme-medium-recent-article](https://github.com/bxcodec/github-readme-medium-recent-article)
-
-# 关于我
-
-人总是喜欢做能够获得正反馈（成就感）的事情，如果感觉本文内容对你有帮助的话，麻烦点亮一下👍，这对我很重要哦～
-
-
-我是 [Flywith24](https://flywith24.gitee.io/)，**人只有通过和别人的讨论，才能知道我们自己的经验是否是真实的**，加我微信交流，让我们共同进步。
-
-- [掘金](https://juejin.im/user/57c7f6870a2b58006b1cfd6c)
-- [小专栏](https://xiaozhuanlan.com/u/3967271263)
-- [Github](https://github.com/Flywith24)
-- 微信（公众号同名）：Flywith24
-
-关注公众号，点击底部 `联系我 -> 知识星球` 加入免费的知识星球
