@@ -126,7 +126,9 @@ https://github-readme-juejin-recent-article-flywith24.vercel.app/{type}/{id}/{in
 
 # 参考
 
-感谢这两个项目提供的思路
+感谢这几个项目提供的思路
+
+- [RSSHub](https://github.com/DIYgod/RSSHub)
 
 - [github-readme-medium](https://github.com/omidnikrah/github-readme-medium)
 
