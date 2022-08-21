@@ -1,9 +1,14 @@
-import {readingTimeCalc} from "../util/utils";
+import {convertImg, readingTimeCalc} from "../util/utils";
 
-export const ArticleCard = async (data) => {
+export const ArticleCard = async (data, hideImage?, imageUrl?, hidDate?, imageW?) => {
     const {link, title, pubDate, content, thumbnail} = data
     const readingTime = readingTimeCalc(content);
+    const url = imageUrl !== undefined && imageUrl != null ? await convertImg(imageUrl) : thumbnail
+    const dateStyle = hidDate === "true" ? "display: none" : ""
+    let imageStyle = "width: " + imageW + "px;"
+    imageStyle = hideImage === "true" ? imageStyle + " display: none" : imageStyle
 
+    console.log("imageStyle " + imageStyle)
     return `
 <svg fill="none" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -47,7 +52,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 				}
         img {
           margin-right: 10px;
-          width: 150px;
+          width: 10px;
           height: 100%;
           object-fit: contain;
         }
@@ -76,15 +81,15 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
 			</style>
       <div class="outer-container flex">
         <a class="container flex" xlink:href="${link}" target="__blank">
-        <img src="${thumbnail}"/>
+          <img src="${url}" alt="" style="${imageStyle}"/>
           <div class="right">
             <h3>${title}</h3>
-            <small>${pubDate} · ${readingTime}</small>
+            <small style="${dateStyle}">${pubDate} · ${readingTime}</small>
           </div>
-				</a>
+		</a>
       </div>
-		</div>
+	</div>
 	</foreignObject>
 </svg>
-`
+`;
 };
