@@ -1,7 +1,4 @@
 {
-  "engines": {
-    "node": "18.x"
-  }
   "name": "github-juejin-readme-rss",
   "version": "1.0.0",
   "main": "index.js",
